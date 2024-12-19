@@ -1,25 +1,33 @@
 def automata(cadena):
     estado = 0
-    for caracter in cadena:
+    for carater in cadena:
         if estado == 0:
-            if caracter == 'm':
+            if carater == 'm':
                 estado = 1
-            elif caracter == 'h':
+            elif carater == 'h':
                 estado = 2
             else:
                 return False
-        elif estado == 1:     
-            if caracter =='a':
+        elif estado == 1:
+            if carater == 'h':
                 estado = 3
-            elif caracter == 'a':
+            elif carater == 'a':
                 estado = 2
             else:
                 return False
         elif estado == 2:
-            if caracter == 'm':
+            if carater == 'm':
                 estado = 1
-    return estado == 3
+            else:
+                return False
+        elif estado == 3:
+            if carater == 'a':
+                estado = 3
+        else: 
+            return False
+    return estado in [2, 3]
+ejemplos = ["mh", "mhaaaa", "h", "hma", "hmha", "hhhh"]
 
-cadenas = ["mha", "mhaaa", "mhbbb"]
-resultados = [cadena for cadena in cadenas if automata(cadena)]
-print("Cadenas aceptadas", resultados)
+resultados = [cadena for cadena in ejemplos if automata(cadena)]
+
+print("aceptadas:", resultados)
